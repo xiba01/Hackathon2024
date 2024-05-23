@@ -10,12 +10,12 @@
         $laureat = $pdostmt1->fetch(PDO::FETCH_ASSOC);
 
     ?>
-<div class="p-8">
+<div class="p-8 w-full">
         <div class="bg-white rounded-lg shadow-xl pb-8">
             <div class="w-full h-[250px]">
                 <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg">
             </div>
-            <div class="flex flex-col items-center -mt-20">
+            <div class="flex flex-col items-center mt-20">
                 <img src="
                 <?php 
                             if (!empty($laureat['img']) && file_exists($laureat['img'])) {
@@ -50,7 +50,7 @@
         </div>
 
         <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
-            <div class="w-full flex flex-col 2xl:w-1/3">
+            <div class="w-full flex flex-col">
                 <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-white rounded-lg shadow-xl my-4 p-8">
                         <h4 class="text-xl text-gray-900 font-bold">Personal <span class="underline underline-offset-3 decoration-6 decoration-green-500">Infos</span></h4>
@@ -64,7 +64,7 @@
                                 <span class="text-gray-700"><?php echo $laureat['promotion']; ?></span>
                             </li>
                             <li class="flex border-b py-2">
-                                <span class="font-bold w-40 ">Filiere:</span>
+                                <span class="font-bold w-40 ">Filière:</span>
                                 <span class="text-gray-700"><?php echo $laureat['Filiere']; ?></span>
                             </li>
                             <li class="flex border-b py-2">
@@ -170,7 +170,6 @@
             </div>
             
         </div>
-        <?php } ?>
         <div class="bg-white rounded-lg shadow-xl p-8 my-4">
             <h4 class="text-xl text-gray-900 font-bold">Souvenirs</h4>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
@@ -204,5 +203,5 @@
         </div>
         </div>
     </div>
-
+    <?php } ?>
 <?php include 'components/profil/footer.php'; ?>
