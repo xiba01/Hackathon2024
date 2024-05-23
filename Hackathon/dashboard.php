@@ -1,324 +1,155 @@
 <?php
-include './components/header.php';
+include './php/connect.php';
+$query1 = 'SELECT numbre_created , creation_date FROM count_Laureat WHERE valid=1 AND creation_date BETWEEN CURDATE() - INTERVAL 15 DAY AND CURDATE();';
+$result = $db->query($query1);
+$count = 0;
+$data = [];
+
+while ($laureat_valider = $result->fetch(PDO::FETCH_ASSOC)) {
+    $data1[$count]['y'] = $laureat_valider['numbre_created'];
+    $dateTime = new DateTime($laureat_valider['creation_date']);
+    $formattedTime = $dateTime->format('d F');
+    $data1[$count]['label'] = $formattedTime;
+    $count++;
+}
+
+$query2 = 'SELECT creation_date , numbre_created FROM count_Laureat WHERE valid=0 AND creation_date BETWEEN CURDATE() - INTERVAL 15 DAY AND CURDATE();';
+$result = $db->query($query2);
+$count = 0;
+$data = [];
+while ($laureat_nonvalider = $result->fetch(PDO::FETCH_ASSOC)) {
+    $data2[$count]['y'] = $laureat_nonvalider['numbre_created'];
+    $dateTime = new DateTime($laureat_nonvalider['creation_date']);
+    $formattedTime = $dateTime->format('d F');
+    $data2[$count]['label'] = $formattedTime;
+    $count++;
+}
+
+include 'components/header_admin.php';
 include 'components/sidebar.php';
 ?>
 <div class=" h-auto pt-13 ">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 mb-2">
-    </div>
-
-    <?php
-    $query = "SELECT 
-      Identifiant,
-      nom,
-      Prenom,
-      email,
-      Tel,
-      img,
-      promotion,
-      Fonction,
-      Employeur,
-      valide,
-      Filiere.LibelleF AS Filiere,
-      EFP.LibelleE AS Etablissement
-      FROM 
-      Laureat
-      INNER JOIN 
-      Filiere ON Laureat.Filiere = Filiere.CodeF
-      INNER JOIN 
-      EFP ON Laureat.Etablissement = EFP.CodeE
-      where Laureat.valide=1
-      Limit 5";
-    $t = $db->prepare($query);
-    $t->execute();
-    $laureats = $t->fetchall(PDO::FETCH_ASSOC);
-    ?>
     <div class=" h-auto pt-13 ">
-        <section class=" p-3 ">
-            <div class="mx-auto max-w-screen-xl  ">
-                <!-- Start coding here -->
-                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                        <div class="w-full md:w-1/2">
-                            <form class="flex items-center">
-                                <label for="simple-search" class="sr-only">Search</label>
-                                <div class="relative w-full">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                    <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button type="button" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
-                                        <path stroke-linejoin="round" d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2" />
-                                        <path d="M12 15.5V4" />
-                                        <path stroke-linejoin="round" d="m8 12l4 4l4-4" />
-                                    </g>
-                                </svg>
+        <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 h-fit md:h-fit ">
+                <h3 class="text-4xl sm:text-4xl leading-none font-bold text-green-800"> NB des Laureats Inscrits </h2>
+                    <h4 class="text-base font-normal text-gray-500">Laureats Valider
+                </h3>
+                <br>
+                <?php
+                $query = 'SELECT SUM(numbre_created) as sum FROM count_Laureat WHERE valid = 1';
+                $result = $db->query($query);
+                $laureat_valid = $result->fetch();
+                ?>
+                <div class="flex items-center justify-center">
+                    <div class="flex-shrink-0 h-fit">
 
-                                Telecharger
-                            </button>
-                            <div class="flex items-center space-x-3 w-full md:w-auto">
+                        <span class="text-6xl sm:text-6xl leading-none font-bold text-gray-900" id="counter1">
+                        </span>
 
-                                <div id="actionsDropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="actionsDropdownButton">
-                                        <li>
-                                            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mass
-                                                Edit</a>
-                                        </li>
-                                    </ul>
-                                    <div class="py-1">
-                                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete
-                                            all</a>
-                                    </div>
-                                </div>
-                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
-                                    </svg>
-                                    Filter
-                                    <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                </button>
-                                <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
-                                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Choose brand</h6>
-                                    <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
-                                        <li class="flex items-center">
-                                            <input id="apple" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Apple
-                                                (56)</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="fitbit" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Microsoft
-                                                (16)</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="razor" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label for="razor" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Razor
-                                                (49)</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="nikon" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label for="nikon" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Nikon
-                                                (12)</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="benq" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label for="benq" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">BenQ
-                                                (74)</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
+                    <svg class=" ml-5 mt-2 w-[48px] h-[48px] text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z"
+                            clip-rule="evenodd" />
+                    </svg>
 
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        tel
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Promotion
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Filiere
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Etablissement
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($laureats as $key => $laureat) {
-                                ?>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                                        <th scope="row" class="px-6 py-4">
-                                            <a href='profil.php?email=<?php echo $laureat['email']; ?>' class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                <img class="w-10 h-10 rounded-full" src="asset/images/profile0.webp" alt="profile image">
-                                                <div class="ps-3">
-                                                    <div class="text-base font-semibold">
-                                                        <?= $laureat['nom'] . ' ' . $laureat['Prenom'] ?></div>
-                                                    <div class="font-normal text-gray-500"><?= $laureat['email'] ?></div>
-                                                </div>
 
-                                        </th>
-
-                                        <td class="px-6 py-4">
-                                            <?= $laureat['Tel'] ?>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <?= $laureat['promotion'] ?>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <?= $laureat['Filiere'] ?>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <?= $laureat['Etablissement'] ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
 
                 </div>
             </div>
-        </section>
-        <?php
-        $query = "SELECT 
-Identifiant,
-nom,
-Prenom,
-email,
-Tel,
-promotion,
-Fonction,
-Employeur,
-valide,
-Filiere.LibelleF AS Filiere,
-EFP.LibelleE AS Etablissement
-FROM 
-Laureat
-INNER JOIN 
-Filiere ON Laureat.Filiere = Filiere.CodeF
-INNER JOIN 
-EFP ON Laureat.Etablissement = EFP.CodeE
-where Laureat.valide=0
-limit 5";
-        $t = $db->prepare($query);
-        $t->execute();
-        $laureats = $t->fetchall(PDO::FETCH_ASSOC)
-        ?>
-        <main class="max-w-[1300px] mx-auto">
-            <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-                <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
-                    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                        <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                            <div class="w-full md:w-1/2">
-                                <form class="flex items-center">
-                                    <label for="simple-search" class="sr-only">Search</label>
-                                    <div class="relative w-full">
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <div class="flex items-center space-x-3 w-full md:w-auto">
-
-
-                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-4 w-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
-                                        </svg>
-                                        Filter
-                                        <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                        </svg>
-                                    </button>
-                                    <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
-                                        <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Choose brand</h6>
-                                        <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
-                                            <li class="flex items-center">
-                                                <input id="apple" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Apple
-                                                    (56)</label>
-                                            </li>
-                                            <li class="flex items-center">
-                                                <input id="fitbit" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="fitbit" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Microsoft
-                                                    (16)</label>
-                                            </li>
-                                            <li class="flex items-center">
-                                                <input id="razor" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="razor" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Razor
-                                                    (49)</label>
-                                            </li>
-                                            <li class="flex items-center">
-                                                <input id="nikon" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="nikon" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Nikon
-                                                    (12)</label>
-                                            </li>
-                                            <li class="flex items-center">
-                                                <input id="benq" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="benq" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">BenQ
-                                                    (74)</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" class="px-4 py-3">Name</th>
-                                        <th scope="col" class="px-4 py-3">Email</th>
-                                        <th scope="col" class="px-4 py-3">Tel</th>
-                                        <th scope="col" class="px-4 py-3">Promotion</th>
-                                        <th scope="col" class="px-4 py-3">Filiere</th>
-                                        <th scope="col" class="px-4 py-3">Etablissement</th>
-                                        <th scope="col" class="px-4 py-3 flex justify-center">
-                                            Actions
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($laureats as $key => $laureat) {
-                                    ?>
-                                        <tr class="border-b dark:border-gray-700">
-                                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $laureat['nom'] . " " . $laureat['Prenom'] ?></th>
-                                            <td class="px-4 py-3"><?= $laureat['email'] ?></td>
-                                            <td class="px-4 py-3"><?= $laureat['Tel'] ?></td>
-                                            <td class="px-4 py-3"><?= $laureat['promotion'] ?></td>
-                                            <td class="px-4 py-3"><?= $laureat['Filiere'] ?></td>
-                                            <td class="px-4 py-3"><?= $laureat['Etablissement'] ?> </td>
-                                            <td class="px-4 py-3 flex items-center ">
-                                                <a onclick="return confirm('Refuser ?')" href="refus_laureat.php?id=<?= $laureat['Identifiant'] ?>">
-                                                    <button type="button" class="mr-2 flex  items-center justify-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                                                        Refuser
-                                                    </button>
-                                                </a>
-                                                <a onclick="return confirm('Accepter ?')" href="accept_laureat.php?id=<?= $laureat['Identifiant'] ?>">
-                                                    <button type="button" class="mr-2 flex  items-center justify-center text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                                                        Accepter
-                                                    </button>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-
-
-
-                                </tbody>
-                            </table>
-                        </div>
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 h-fit md:h-fit ">
+                <h3 class="text-4xl sm:text-4xl leading-none font-bold text-blue-900">Demandes D'Inscription
+                    </h2>
+                    <h4 class="text-base font-normal text-gray-500">Laureats en attente du Valider
+                </h3>
+                <br>
+                <div class="flex items-center justify-center">
+                    <div class="flex-shrink-0 h-fit">
+                        <?php
+                        $query = 'SELECT count(*) as count  FROM Laureat WHERE valide = 0';
+                        $result = $db->query($query);
+                        $laureat_nonvalid = $result->fetch();
+                        ?>
+                        <span
+                            class="text-6xl sm:text-6xl leading-none font-bold text-gray-900" id="counter2">0</span>
 
                     </div>
+                    <svg class="ml-10 mt-2 w-[48px] h-[48px] text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
+                            clip-rule="evenodd" />
+                    </svg>
+
                 </div>
-            </section>
-        </main>
-    </div>
-    <?php include './components/footer.php'; ?>
+            </div>
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 h-fit md:h-fit col-span-2">
+                <h3 class="text-4xl sm:text-4xl leading-none font-bold text-gray-800">Nombre des Souvenirs poster
+                    </h2>
+                    <h4 class="text-base font-normal text-gray-500">Tous les souvenirs des laureats
+                </h3>
+                <br>
+                <div class="flex items-center justify-center">
+                    <div class="flex-shrink-0 h-fit">
+                        <?php
+                        $query = 'SELECT count(*) as count FROM Souvenir';
+                        $result = $db->query($query);
+                        $Souvenir = $result->fetch();
+                        ?>
+                        <span
+                            class="text-6xl sm:text-6xl leading-none font-bold text-gray-900" id="counter3">0</span>
+
+                    </div>
+                    <svg class="ml-5 mt-2  w-[48px] h-[48px] text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z"
+                            clip-rule="evenodd" />
+                        <path fill-rule="evenodd"
+                            d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12c0 .556-.227 1.06-.593 1.422A.999.999 0 0 1 20.5 20H4a2.002 2.002 0 0 1-2-2V6Zm6.892 12 3.833-5.356-3.99-4.322a1 1 0 0 0-1.549.097L4 12.879V6h16v9.95l-3.257-3.619a1 1 0 0 0-1.557.088L11.2 18H8.892Z"
+                            clip-rule="evenodd" />
+                    </svg>
+
+
+                </div>
+            </div>
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 h-64 md:h-[500px] ">
+                <div class="h-full w-full" id="chartContainer"></div>
+            </div>
+            <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 h-64 md:h-[500px] ">
+                <div class="h-full w-full" id="chartContainer2"></div>
+
+            </div>
+        </div>
+        <script>
+        function countToN(elementId, n) {
+            let count = 0;
+            const $counterElement = $('#' + elementId);
+            const intervalTime = 1000 / n; // Calculate interval time for 3 seconds to reach n
+
+            const interval = setInterval(() => {
+                $counterElement.text(count);
+                if (count === n) {
+                    clearInterval(interval);
+                } else {
+                    count++;
+                }
+            }, intervalTime);
+        }
+
+        $(document).ready(function() {
+            // Example usage: count to different numbers on different elements
+            countToN('counter1', <?php echo $laureat_valid['sum']; ?>);
+            countToN('counter2', <?php echo $laureat_nonvalid['count']; ?>);
+            countToN('counter3', <?= $Souvenir['count']; ?>);
+        });
+    </script>
+
+
+        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+        <?php include './components/footer_admin.php'; ?>
