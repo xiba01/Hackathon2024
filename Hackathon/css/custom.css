@@ -1,0 +1,7 @@
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+.bg-gray-500 {
+  background-color: #6b7280; /* Tailwind CSS gray-500 color */
+}
