@@ -33,14 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
+        $photoProfile = 'profile0.webp'; 
+
         if (isset($_FILES['photo-profile']) && $_FILES['photo-profile']['error'] === UPLOAD_ERR_OK) {
             $fileTmpName = $_FILES['photo-profile']['tmp_name'];
             $fileName = $_FILES['photo-profile']['name'];
             $fileSize = $_FILES['photo-profile']['size'];
             $fileType = $_FILES['photo-profile']['type'];
 
-            $uploadDir = '../asset/images/laureat';
-
+            $uploadDir = '../asset/images/laureat/';
             $uniqueFileName = uniqid() . '_' . $fileName;
 
             if (move_uploaded_file($fileTmpName, $uploadDir . $uniqueFileName)) {
@@ -49,9 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Error uploading file.";
                 exit();
             }
-        } else {
-            echo "Error uploading file.";
-            exit();
         }
 
         $stmt = $db->prepare("INSERT INTO Laureat (nom, Prenom, email, mdp, Tel, promotion, Filiere, Etablissement, Fonction, Employeur, img, valide) VALUES (:nom, :prenom, :email, :mdp, :tel, :promotion, :filiere, :etablissement, :fonction, :employeur, :photoProfile, :valide)");
@@ -104,3 +102,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $db = null;
 }
+?>

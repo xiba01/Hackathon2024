@@ -6,4 +6,10 @@
     <?php include './components/article/article-page.php' ?>
 </main>
 
-<?php include './components/footer.php'; ?>
+
+
+
+<script src="node_modules/flowbite/dist/flowbite.min.js"></script>
+</body>
+
+</html>

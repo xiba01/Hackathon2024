@@ -9,12 +9,12 @@
             </span>
             <h3 class="flex items-center mb-1 ml-5 text-lg font-semibold text-gray-900 dark:text-white">Introduction/Aperçu<span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ms-3">Obligratoire</span></h3>
             <div class="mb-2">
-                <input type="text" id="article_titre" name="article_titre" placeholder="Titre" class="block border-none outline-none w-full p-4 text-gray-900 rounded-lg bg-transparent text-4xl">
+                <input type="text" id="article_titre" name="article_titre" placeholder="Titre" class="block border-none outline-none w-full p-4 text-gray-900 rounded-lg bg-transparent text-4xl" required>
             </div>
 
 
 
-            <textarea id="message" name="message" rows="4" class=" mb-4 block p-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-none outline-none" placeholder="Tapez le contenu de l'Introduction ici..."></textarea>
+            <textarea id="message" name="message" rows="4" class=" mb-4 block p-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-none outline-none" placeholder="Tapez le contenu de l'Introduction ici..." required></textarea>
 
 
             <div class="flex items-center justify-center w-full">
