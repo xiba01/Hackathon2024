@@ -1,6 +1,10 @@
 <section class="bg-gray-50 dark:bg-gray-900 px-auto h-full">
+
     <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-20 lg:py-16 lg:grid-cols-12 h-full">
         <div class="w-full place-self-center lg:col-span-6">
+            <div class="mb-4">
+                <?php include "./components/previous.php"; ?>
+            </div>
             <div class="p-6 mx-auto bg-white rounded-lg shadow dark:bg-gray-800 sm:max-w-xl sm:p-8">
                 <a href="#" class="inline-flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white">
                     <img class="h-8 mr-2" src="./asset/images/Logo/ofppt-logo.png" alt="logo">

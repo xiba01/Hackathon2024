@@ -11,30 +11,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         error_log("Received data - Event ID: $event_id, Laureat ID: $laureat_id, Status: $status");
 
-        $check_sql = "SELECT * FROM Event_attendees WHERE event_id = :event_id AND laureat_id = :laureat_id";
-        $check_stmt = $db->prepare($check_sql);
-        $check_stmt->execute([
-            ':event_id' => $event_id,
-            ':laureat_id' => $laureat_id
-        ]);
-
-        if ($check_stmt->rowCount() == 0) {
-            $sql = "INSERT INTO Event_attendees (event_id, laureat_id, status)
-                    VALUES (:event_id, :laureat_id, :status)";
-            $stmt = $db->prepare($sql);
-            if ($stmt->execute([
+        try {
+            $check_sql = "SELECT * FROM Event_attendees WHERE event_id = :event_id AND laureat_id = :laureat_id";
+            $check_stmt = $db->prepare($check_sql);
+            $check_stmt->execute([
                 ':event_id' => $event_id,
-                ':laureat_id' => $laureat_id,
-                ':status' => $status,
-            ])) {
-                echo 'RSVP submitted successfully!';
+                ':laureat_id' => $laureat_id
+            ]);
+
+            if ($check_stmt->rowCount() == 0) {
+                $sql = "INSERT INTO Event_attendees (event_id, laureat_id, status) VALUES (:event_id, :laureat_id, :status)";
+                $stmt = $db->prepare($sql);
+                if ($stmt->execute([
+                    ':event_id' => $event_id,
+                    ':laureat_id' => $laureat_id,
+                    ':status' => $status,
+                ])) {
+                    echo 'RSVP submitted successfully!';
+                } else {
+                    $errorInfo = $stmt->errorInfo();
+                    error_log("SQL error: " . implode(":", $errorInfo));
+                    echo 'Failed to submit RSVP. SQL Error: ' . $errorInfo[2];
+                }
             } else {
-                $errorInfo = $stmt->errorInfo();
-                error_log("SQL error: " . implode(":", $errorInfo));
-                echo 'Failed to submit RSVP. SQL Error: ' . $errorInfo[2];
+                echo 'You are already registered for this event.';
             }
-        } else {
-            echo 'You are already registered for this event.';
+        } catch (Exception $e) {
+            error_log("Exception: " . $e->getMessage());
+            echo 'An error occurred while processing your request.';
         }
     } else {
         echo 'User not logged in.';
@@ -42,3 +46,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo 'Invalid request method.';
 }
+?>

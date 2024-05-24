@@ -1,8 +1,5 @@
 <?php
 session_start();
-if ($_SESSION['signed_in']==false) {
-    header('Location: signin2.php');
-}
 ?>
 <!DOCTYPE html>
 <html class="relative min-h-full h-full">
@@ -13,9 +10,9 @@ if ($_SESSION['signed_in']==false) {
     <link href="css/output.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/custom.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <?php 
-    if(basename($_SERVER['PHP_SELF']) == 'dashboard.php'){
-      include_once('components/charts.php');
+    <?php
+    if (basename($_SERVER['PHP_SELF']) == 'dashboard.php') {
+        include_once('components/charts.php');
     }
     ?>
 </head>

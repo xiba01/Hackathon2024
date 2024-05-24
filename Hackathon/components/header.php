@@ -31,3 +31,4 @@ if (!isset($_SESSION['signed_in']) && basename($_SERVER['PHP_SELF']) != 'singin.
 
 <body class=" bg-gray-100 min-h-full h-full dark:bg-black">
   <?php include './php/connect.php' ?>
+  

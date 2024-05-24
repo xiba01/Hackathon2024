@@ -129,7 +129,7 @@ $laureats = $t->fetchall(PDO::FETCH_ASSOC);
 
                                         <th scope="row" class="px-6 py-4">
                                             <a href='profil_admin.php?email=<?= $laureat['email'] ?>' class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                <img class="w-10 h-10 rounded-full" src="<?= './asset/images/laureat' . $laureat['img'] ?>" alt="">
+                                                <img class="w-10 h-10 rounded-full" src="<?= './asset/images/laureat/' . $laureat['img'] ?>" alt="">
                                                 <div class="ps-3">
                                                     <div class="text-base font-semibold">
                                                         <?= $laureat['nom'] . ' ' . $laureat['Prenom'] ?></div>
@@ -174,7 +174,7 @@ $laureats = $t->fetchall(PDO::FETCH_ASSOC);
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row" class="px-6 py-4">
                                             <a href='profil.php?email=${result.email}' class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                <img class="w-10 h-10 rounded-full" src="./asset/images/${result.img}" alt="Image">
+                                                <img class="w-10 h-10 rounded-full" src="./asset/images/laureat/${result.img}" alt="Image">
                                                 <div class="ps-3">
                                                     <div class="text-base font-semibold">${result.nom} ${result.Prenom}</div>
                                                     <div class="font-normal text-gray-500">${result.email}</div>

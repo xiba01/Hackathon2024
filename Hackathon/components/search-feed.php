@@ -12,7 +12,7 @@
 
         <aside aria-labelledby="categories-label">
             <h3 id="categories-label" class="sr-only">Categories</h3>
-            <nav class="p-6 mb-6 font-medium text-gray-500 bg-gray-50 rounded-lg border border-gray-200 dark:border-gray-700 dark:text-gray-400">
+            <nav class="p-6 mb-6 font-medium text-gray-500 bg-gray-50 rounded-lg border dark:bg-gray-800 border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 <ul class="mb-6 space-y-4">
                     <li>
                         <a href="#" class="flex items-center text-primary-600 dark:text-primary-500">
@@ -35,19 +35,19 @@
                     </li>
 
                 </ul>
-                <h4 class="mb-4 text-gray-900 dark:text-white">Others</h4>
+                <h4 class="mb-4 text-gray-900 dark:text-white">Plus</h4>
                 <ul class="space-y-4">
                     <li>
                         <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z">
                                 </path>
                                 <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"></path>
-                            </svg> Privacy policy</a>
+                            </svg> Autres plateformes</a>
                     </li>
                     <li>
                         <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path>
-                            </svg> Terms of use</a>
+                            </svg> Conditions d'utilisation</a>
                     </li>
                     <li>
                         <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@
 
                         $query = isset($_GET['query']) ? $_GET['query'] : '';
 
-                        $laureatRes = $db->prepare("SELECT Identifiant, nom, Prenom, promotion, Filiere, Etablissement, Fonction, Employeur FROM Laureat WHERE nom LIKE :search OR Prenom LIKE :search LIMIT 5");
+                        $laureatRes = $db->prepare("SELECT Identifiant, nom, img, Prenom, promotion, Filiere, Etablissement, Fonction, Employeur FROM Laureat WHERE nom LIKE :search OR Prenom LIKE :search LIMIT 5");
                         $search = "%" . $query . "%";
                         $laureatRes->bindParam(':search', $search, PDO::PARAM_STR);
 
@@ -87,7 +87,7 @@
                             <li class="py-3 sm:py-4">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
-                                        <img class="w-8 h-8 rounded-full" src="./asset/images/laureat<? echo $laureat['img']; ?>" alt="">
+                                        <img class="w-8 h-8 rounded-full" src="./asset/images/laureat/<?php echo $laureat['img']; ?>" alt="">
                                     </div>
                                     <div class="flex-1 min-w-0 ms-4">
                                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -166,7 +166,7 @@
                 <div class="p-4 space-y-4 bg-white rounded-lg shadow dark:bg-gray-800 xl:p-6 2xl:p-8 lg:space-y-6">
                     <div class="flex items-center space-x-4">
                         <div class="flex-shrink-0">
-                            <img class="w-10 h-10 rounded-full" src="./asset/images/laureat<?php echo $souvenir['img']; ?>" alt="<?php echo $souvenir['nom']; ?>">
+                            <img class="w-10 h-10 rounded-full" src="./asset/images/laureat/<?php echo $souvenir['img']; ?>" alt="<?php echo $souvenir['nom']; ?>">
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-semibold text-gray-900 truncate dark:text-white">
@@ -241,7 +241,7 @@
                                     <!-- Modal footer -->
                                     <div class="flex items-center p-4 space-x-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                         <div class="flex-shrink-0">
-                                            <img class="w-10 h-10 rounded-full" src="./asset/images/laureat<?php echo $laureat_signed['img']; ?>" alt="<?php echo $laureat_signed['nom']; ?>">
+                                            <img class="w-10 h-10 rounded-full" src="./asset/images/laureat/<?php echo $laureat_signed['img']; ?>" alt="<?php echo $laureat_signed['nom']; ?>">
                                         </div>
                                         <form method="post" class="w-full flex flex-row" action="./php/posts/create-post-reply.php?souvenir_id=<?php echo $souvenir['identifiant']; ?>">
                                             <input name="post_reply" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tapez votre commentaire" required />

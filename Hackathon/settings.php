@@ -72,7 +72,7 @@
                                 <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
                                     <img class="mb-4 w-28 h-28 rounded-lg sm:mb-0 xl:mb-4 2xl:mb-0" src="
                             <?php
-                            if (!empty($laureat['img']) && file_exists($laureat['img'])) {
+                            if (!empty($laureat['img'])) {
                                 echo 'asset/images/laureat/' . $laureat['img'];
                             } else {
                                 echo 'asset/images/profile0.webp';

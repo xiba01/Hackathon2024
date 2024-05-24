@@ -10,7 +10,7 @@
         $laureat_signed = $laureats->fetch(PDO::FETCH_ASSOC);
         ?>
 
-        <div class="p-6 mb-6 text-gray-500 rounded-lg border bg-gray-50 border-gray-200 dark:border-gray-700 dark:text-gray-400">
+        <div class="p-6 mb-6 text-gray-500 rounded-lg border bg-gray-50 border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
             <a href="profil?id=<?php echo $laureat_signed['Identifiant']; ?>" class="flex items-center mb-4">
                 <div class="mr-3 shrink-0">
                     <img class="mt-1 w-12 h-12 rounded-full" src="./asset/images/laureat/<?php echo $laureat_signed['img']; ?>" alt="Jese Leos">
@@ -32,7 +32,7 @@
 
         <aside aria-labelledby="categories-label">
             <h3 id="categories-label" class="sr-only">Categories</h3>
-            <nav class="p-6 mb-6 font-medium text-gray-500 bg-gray-50 rounded-lg border border-gray-200 dark:border-gray-700 dark:text-gray-400">
+            <nav class="p-6 mb-6 font-medium text-gray-500 bg-gray-50 rounded-lg border dark:bg-gray-800 border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 <ul class="mb-6 space-y-4">
                     <li>
                         <a href="#" class="flex items-center text-primary-600 dark:text-primary-500">
@@ -55,19 +55,19 @@
                     </li>
 
                 </ul>
-                <h4 class="mb-4 text-gray-900 dark:text-white">Others</h4>
+                <h4 class="mb-4 text-gray-900 dark:text-white">Plus </h4>
                 <ul class="space-y-4">
                     <li>
                         <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z">
                                 </path>
                                 <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"></path>
-                            </svg> Privacy policy</a>
+                            </svg> Autres plateformes</a>
                     </li>
                     <li>
                         <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path>
-                            </svg> Terms of use</a>
+                            </svg> Conditions d'utilisation</a>
                     </li>
                     <li>
                         <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
