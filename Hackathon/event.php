@@ -29,13 +29,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['event_id'])) {
 <main class="h-full">
 
     <main class="h-full pb-16 lg:pb-24 bg-white dark:bg-gray-900">
-        <header class="bg-[url('https://flowbite.s3.amazonaws.com/blocks/marketing-ui/articles/background.png')] w-full h-[460px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative">
+        <header style="background-image: url('./asset/images/events/<?php echo $event['event_img']; ?>');" class="w-full h-[460px] xl:h-[537px] bg-no-repeat bg-cover bg-center bg-blend-darken relative">
             <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
-            <div class="absolute top-24 left-1/2 px-4 mx-auto w-full max-w-screen-xl -translate-x-1/2 xl:top-1/2 xl:-translate-y-1/2 xl:px-0">
+            <div class="absolute top-24 left-1/2 px-4 mx-auto w-full max-w-screen-xl -translate-x-1/2 xl:top-1/2 xl:-translate-y-1/6 xl:px-0">
                 <span class="block mb-4 text-gray-300">Publié par <a href="#" class="font-semibold text-white hover:underline"><?php echo $event['nom']; ?> <?php echo $event['Prenom']; ?></a></span>
-                <h1 class="mb-4 max-w-4xl text-2xl font-extrabold leading-none text-white sm:text-3xl lg:text-4xl"><?php echo $event['event_name']; ?></h1>
+                <h1 class="mb-6 max-w-4xl text-2xl font-extrabold leading-none text-white sm:text-3xl lg:text-4xl"><?php echo $event['event_name']; ?></h1>
+                <div class="mt-auto text-white" ;>
+                    <?php include './components/previous.php'; ?>
+                </div>
             </div>
         </header>
+
         <div class="flex relative z-20 justify-between p-6 -m-36 mx-4 max-w-screen-xl bg-white dark:bg-gray-800 rounded xl:-m-32 xl:p-9 xl:mx-auto">
             <article class="xl:w-[828px] w-full max-w-none format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                 <div class="flex flex-row justify-between">
@@ -94,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['event_id'])) {
                         <span class="text-gray-900 dark:text-white text-base font-medium"><?php echo $event['location']; ?></span>
                     </div>
                 </div>
-                <div class="flex items-start space-x-4 rtl:space-x-reverse mb-5">
+                <!-- <div class="flex items-start space-x-4 rtl:space-x-reverse mb-5">
                     <div>
                         <div class="text-base font-normal text-gray-500 dark:text-gray-400 mb-2">Participants</div>
                         <div class="flex -space-x-4 rtl:space-x-reverse">
@@ -104,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['event_id'])) {
                             <a class="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-700 border border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+99</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="flex flex-col lg:flex-row justify-between lg:items-center">
                     <div class="flex items-center space-x-3 text-gray-500 dark:text-gray-400 text-base mb-2 lg:mb-0">
                         <span>Par <a href="#" class="text-gray-900 dark:text-white hover:underline no-underline font-semibold"><?php echo $event['nom']; ?> <?php echo $event['Prenom']; ?></a></span>
@@ -139,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['event_id'])) {
 
                             <div class="mb-6 flex items-center">
                                 <a href="event?event_id=<?php echo $event['event_id']; ?>" class="shrink-0">
-                                    <img src="./asset/images/events/<?php echo $event['event_img']; ?>" class="mr-4 max-w-full w-24 h-24 rounded-lg" alt="Image 1">
+                                    <img src="./asset/images/events/<?php echo $event['event_img']; ?>" class="mr-4 max-w-full w-24 h-24 rounded-lg" alt="">
                                 </a>
                                 <div>
                                     <h5 class="mb-2 text-lg font-bold leading-tight dark:text-white text-gray-900"><?php echo $event['event_name']; ?></h5>

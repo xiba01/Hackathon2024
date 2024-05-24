@@ -1,30 +1,35 @@
 <?php
 session_start();
-require_once '../connect.php';
+require_once '../connect.php'; // Make sure this file connects to your database
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
-    $postId = $input['id'];
+if (isset($_POST['souvenir_id'])) {
+    $souvenirId = intval($_POST['souvenir_id']);
 
-    // Verify if the user is the owner of the post
-    $stmt = $db->prepare('SELECT id_laureat FROM Souvenir WHERE identifiant = :id');
-    $stmt->execute(['id' => $postId]);
-    $souvenir = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Start a transaction
+    $db->beginTransaction();
 
-    if ($souvenir && $souvenir['id_laureat'] == $_SESSION['laureat_id']) {
-        // Proceed with deletion
-        $deleteStmt = $db->prepare('DELETE FROM Souvenir WHERE identifiant = :id');
-        $deleteStmt->execute(['id' => $postId]);
+    try {
+        // Delete replies first
+        $sqlReplies = 'DELETE FROM Souvenir_reply WHERE reply_souvenir = :souvenir_id';
+        $stmtReplies = $db->prepare($sqlReplies);
+        $stmtReplies->bindParam(':souvenir_id', $souvenirId, PDO::PARAM_INT);
+        $stmtReplies->execute();
 
-        if ($deleteStmt->rowCount() > 0) {
-            echo json_encode(['success' => true]);
-        } else {
-            echo json_encode(['success' => false]);
-        }
-    } else {
-        echo json_encode(['success' => false]);
+        // Delete the souvenir
+        $sqlSouvenir = 'DELETE FROM Souvenir WHERE identifiant = :souvenir_id';
+        $stmtSouvenir = $db->prepare($sqlSouvenir);
+        $stmtSouvenir->bindParam(':souvenir_id', $souvenirId, PDO::PARAM_INT);
+        $stmtSouvenir->execute();
+
+        // Commit the transaction
+        $db->commit();
+
+        echo json_encode(['success' => true]);
+    } catch (Exception $e) {
+        // Rollback the transaction if something failed
+        $db->rollBack();
+        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }
 } else {
-    echo json_encode(['success' => false]);
+    echo json_encode(['success' => false, 'message' => 'Invalid request']);
 }
-?>

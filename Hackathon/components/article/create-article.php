@@ -7,7 +7,7 @@
                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                 </svg>
             </span>
-            <h3 class="flex items-center mb-1 ml-5 text-lg font-semibold text-gray-900 dark:text-white">Introduction/Aperçu<span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ms-3">Obligratoire</span></h3>
+            <h3 class="flex items-center mb-1 ml-4 text-lg font-semibold text-gray-900 dark:text-white">Introduction/Aperçu<span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ms-3">Obligratoire</span></h3>
             <div class="mb-2">
                 <input type="text" id="article_titre" name="article_titre" placeholder="Titre" class="block border-none outline-none w-full p-4 text-gray-900 rounded-lg bg-transparent text-4xl" required>
             </div>
@@ -39,7 +39,7 @@
                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                 </svg>
             </span>
-            <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Contenu Principal</h3>
+            <h3 class="mb-1 text-lg font-semibold ml-4 text-gray-900 dark:text-white">Contenu Principal</h3>
             <div class="mb-">
                 <input type="text" id="section1-titre" name="section1_titre" placeholder="Section 1" class="block border-none outline-none w-full p-4 text-gray-900 rounded-lg bg-transparent text-2xl">
             </div>
@@ -69,7 +69,7 @@
                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                 </svg>
             </span>
-            <h3 class="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Conclusion/Résumé</h3>
+            <h3 class="mb-1 text-lg font-semibold ml-4 text-gray-900 dark:text-white">Conclusion/Résumé</h3>
             <textarea id="conclusion" name="conclusion" rows="3" class=" mb-4 block p-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-none outline-none" placeholder="Tapez le contenu du Conclusion ici..."></textarea>
         </li>
 

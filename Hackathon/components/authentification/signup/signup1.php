@@ -63,7 +63,7 @@
 
         </div>
         <p class="mt-4 text-sm font-light text-gray-500 dark:text-gray-400">
-            Vous avez déjà un compte? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Connectez-vous.</a>
+            Vous avez déjà un compte? <a href="signin.php" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Connectez-vous.</a>
         </p>
     </div>
 </div>

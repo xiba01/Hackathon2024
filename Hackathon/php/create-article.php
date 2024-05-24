@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $allowedfileExtensions = array('jpg', 'gif', 'png', 'svg');
         if (in_array($fileExtension, $allowedfileExtensions)) {
             // Directory in which the uploaded file will be moved
-            $uploadFileDir = './asset/images/articles/';
+            $uploadFileDir = '../asset/images/articles/';
 
             // Check if the directory exists, if not create it
             if (!is_dir($uploadFileDir)) {
@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dest_path = $uploadFileDir . $newFileName;
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $article_intro_img = $dest_path;
+                // Save only the file name, not the full path
+                $article_intro_img = $newFileName;
             } else {
                 echo 'There was some error moving the file to the upload directory. Please make sure the upload directory is writable by the web server.';
             }

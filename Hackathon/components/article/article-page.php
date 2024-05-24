@@ -14,6 +14,7 @@ if (isset($_GET['article_id'])) {
         $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($article) {
+
 ?>
 
             <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
@@ -22,7 +23,7 @@ if (isset($_GET['article_id'])) {
                         <header class="mb-4 lg:mb-6 not-format">
                             <address class="flex items-center mb-6 not-italic">
                                 <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                                    <img class="mr-4 w-16 h-16 rounded-full" src="./asset/images/laureat<?php echo $article['img']; ?>" alt="Jese Leos">
+                                    <img class="mr-4 w-16 h-16 rounded-full" src="./asset/images/laureat/<?php echo $article['img']; ?>" alt="">
                                     <div>
                                         <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white"><?php echo $article['nom'] . ' ' . $article['Prenom']; ?></a>
                                         <p class="text-base text-gray-500 dark:text-gray-400"><?php echo $article['Fonction']; ?></p>
@@ -79,7 +80,23 @@ if (isset($_GET['article_id'])) {
                                 <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
                                     <a href="#"><?php echo $article['article_titre']; ?></a>
                                 </h2>
-                                <p class="mb-4 text-gray-500 dark:text-gray-400"><?php echo $article['article_content1']; ?></p>
+                                <?php
+                                if (!function_exists('truncateText')) {
+                                    function truncateText($text, $maxLength = 175)
+                                    {
+                                        if ($text === null) {
+                                            return '';
+                                        }
+                                        if (strlen($text) > $maxLength) {
+                                            return substr($text, 0, $maxLength) . '...';
+                                        }
+                                        return $text;
+                                    }
+                                }
+                                ?>
+
+                                <p class="mb-4 text-gray-500 dark:text-gray-400"><?php echo truncateText($article['article_content1']); ?></p>
+
                                 <a href="article?article_id=<?php echo $article['article_id']; ?>" class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
                                     Lire cette article
                                 </a>

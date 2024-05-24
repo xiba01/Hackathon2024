@@ -10,48 +10,53 @@
         $laureat_signed = $laureats->fetch(PDO::FETCH_ASSOC);
         ?>
 
-        <div class=" sm:flex xl:block sm:space-x-4 xl:space-x-0">
-            <img class="w-20 h-20 mb-2 rounded-lg" src="./asset/images/profile0.webp" alt="">
-            <div>
-                <h2 class="text-xl font-bold dark:text-white"><?php echo $laureat_signed['nom'] . ' ' . $laureat_signed['Prenom'];  ?></h2 <ul class="mt-2 space-y-1">
-                <li class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
-                    <svg class="w-4 h-4 mr-2 text-gray-900 dark:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
-                    </svg>
-                    <?php echo $laureat_signed['Fonction']; ?>
-                </li>
-                <li class="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
-                    <svg class="w-4 h-4 mr-2 text-gray-900 dark:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-                    </svg>
-                    <?php echo $laureat_signed['Etablissement']; ?>
-                </li>
+        <aside aria-labelledby="categories-label">
+            <h3 id="categories-label" class="sr-only">Categories</h3>
+            <nav class="p-6 mb-6 font-medium text-gray-500 bg-gray-50 rounded-lg border border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                <ul class="mb-6 space-y-4">
+                    <li>
+                        <a href="#" class="flex items-center text-primary-600 dark:text-primary-500">
+                            <svg aria-hidden="true" class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                </path>
+                            </svg> Accueil</a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500">
+                            <svg class="mr-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                <path fill="currentColor" d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16M64 92a8 8 0 0 1-16 0V80a8 8 0 0 1 8-8h72a8 8 0 0 1 8 8v12a8 8 0 0 1-16 0v-4h-20v48h4a8 8 0 0 1 0 16H80a8 8 0 0 1 0-16h4V88H64Zm136 92H80a8 8 0 0 1 0-16h120a8 8 0 0 1 0 16m0-32h-64a8 8 0 0 1 0-16h64a8 8 0 0 1 0 16m0-32h-48a8 8 0 0 1 0-16h48a8 8 0 0 1 0 16" />
+                            </svg> Articles</a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500">
+                            <svg class="mr-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="currentColor" fill-rule="evenodd" d="M5 5a1 1 0 0 0 1-1a1 1 0 1 1 2 0a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1a1 1 0 1 1 2 0a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1a1 1 0 1 1 2 0a1 1 0 0 0 1 1a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2M3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2m6.01-6a1 1 0 1 0-2 0a1 1 0 0 0 2 0m2 0a1 1 0 1 1 2 0a1 1 0 0 1-2 0m6 0a1 1 0 1 0-2 0a1 1 0 0 0 2 0m-10 4a1 1 0 1 1 2 0a1 1 0 0 1-2 0m6 0a1 1 0 1 0-2 0a1 1 0 0 0 2 0m2 0a1 1 0 1 1 2 0a1 1 0 0 1-2 0" clip-rule="evenodd" />
+                            </svg> Evenements</a>
+                    </li>
+
                 </ul>
-            </div>
-        </div>
-        <div class="mb-6 sm:flex xl:block xl:space-y-4">
-            <div class="sm:flex-1">
-                <address class="text-sm not-italic font-normal text-gray-500 dark:text-gray-400">
-                    <div class="mt-4">
-                        Email adress
-                    </div>
-                    <a class="text-sm font-medium text-gray-900 dark:text-white" href="mailto:webmaster@flowbite.com"><?php echo $laureat_signed['email']; ?></a>
-                    <div class="mt-4">
-                        Infos
-                    </div>
-                    <div class="mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        <?php echo $laureat_signed['promotion']; ?>
-                    </div>
-                    <div class="mt-4 dark:text-gray-400">
-                        <?php echo $laureat_signed['Filiere']; ?>
-                    </div>
-                    <div class="text-sm font-medium text-gray-900 dark:text-white">
-                        <?php echo $laureat_signed['Tel']; ?>
-                    </div>
-                </address>
-            </div>
-        </div>
+                <h4 class="mb-4 text-gray-900 dark:text-white">Others</h4>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z">
+                                </path>
+                                <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"></path>
+                            </svg> Privacy policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path>
+                            </svg> Terms of use</a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center hover:text-primary-600 dark:hover-text-primary-500"><svg class="mr-2 w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 4h3a3 3 0 006 0h3a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a2.5 2.5 0 10-4.9 0h4.9zM12 9a1 1 0 100 2h3a1 1 0 100-2h-3zm-1 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                            </svg> Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
     </div>
     <div class="h-full w-full max-w-3xl col-span-2 p-4 m-auto mb-5 space-y-6  overflow-y-auto lg:pt-6">
@@ -104,7 +109,7 @@
             </div>
 
             <div class="m0 flex items-center p-4 space-x-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
-                <p class="mx-auto text-md font-medium leading-none text-gray-800 dark:text-white">View All Results</p>
+                <p class="mx-auto text-md font-medium leading-none text-gray-800 dark:text-white"><a href="laureats?query=<?php echo $_GET['query']; ?>">Voir tous les résultats</a></p>
             </div>
 
         </div>
@@ -271,43 +276,5 @@
     </div>
     <div class=" w-full px-4 py-6 space-y-10 xl:flex xl:flex-col xl:sticky">
 
-        <?php
-        $sql = "SELECT * FROM Laureat";
-
-        $laureats = $db->prepare($sql);
-        $laureats->execute();
-
-        $laureatCount = $laureats->rowCount();
-        ?>
-
-        <div>
-            <h3 class="mb-2 text-base font-bold text-gray-900 dark:text-white">Laureats (<?php echo $laureatCount; ?>)</h3>
-            <ul>
-                <?php $sql = "SELECT * FROM Laureat LIMIT 7";;
-
-                $laureats = $db->prepare($sql);
-                $laureats->execute();
-                while ($laureat = $laureats->fetch(PDO::FETCH_ASSOC)) { ?>
-
-                    <li class="flex items-center pb-4 space-x-4">
-                        <button class="flex items-center w-full p-4 space-x-4 bg-white dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-
-
-                            <div class="flex items-start gap-4">
-                                <img class="w-10 h-10 rounded-full" src="./asset/images/profile0.webp" alt="">
-                                <div class="font-medium dark:text-white">
-                                    <div><?php echo $laureat['nom'] . ' ' . $laureat['Prenom'];  ?></div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400"><?php echo $laureat['Fonction']; ?></div>
-                                </div>
-                            </div>
-
-
-                        </button>
-                    </li>
-                <?php } ?>
-
-            </ul>
-
-        </div>
     </div>
 </div>

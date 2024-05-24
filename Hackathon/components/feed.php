@@ -1,5 +1,5 @@
 <div class="relative grid grid-cols-4 overflow-y-hidden xl:grid-cols-4 xl:gap-4 feed-container">
-    <div class="hidden px-4 py-6 sticky xl:pb-0 xl:mb-0 xl:flex xl:flex-col">
+    <div class=" hidden px-4 py-6 xl:pb-0 xl:mb-0 xl:flex xl:flex-col">
 
         <?php
         $sql = "SELECT * FROM Laureat WHERE Identifiant = ?";
@@ -11,9 +11,9 @@
         ?>
 
         <div class="p-6 mb-6 text-gray-500 rounded-lg border bg-gray-50 border-gray-200 dark:border-gray-700 dark:text-gray-400">
-            <a href="#" class="flex items-center mb-4">
+            <a href="profil?id=<?php echo $laureat_signed['Identifiant']; ?>" class="flex items-center mb-4">
                 <div class="mr-3 shrink-0">
-                    <img class="mt-1 w-12 h-12 rounded-full" src="./asset/images/laureat<?php echo $laureat_signed['img']; ?>" alt="Jese Leos">
+                    <img class="mt-1 w-12 h-12 rounded-full" src="./asset/images/laureat/<?php echo $laureat_signed['img']; ?>" alt="Jese Leos">
                 </div>
                 <div class="mr-3">
                     <span class="block font-medium text-gray-900 dark:text-white"><?php echo $laureat_signed['nom']; ?> <?php echo $laureat_signed['Prenom']; ?></span>
@@ -27,7 +27,7 @@
                 <dt class="mb-2 text-sm font-bold text-gray-900 uppercase dark:text-white">Rejoint</dt>
                 <dd class="text-sm text-gray-500 dark:text-gray-400">September 20, 2018</dd>
             </dl>
-            <button type="button" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 w-full">Mon Profile</button>
+            <button type="button" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 w-full"><a href="profil?id=<?php echo $laureat_signed['Identifiant']; ?>">Mon Profile</a></button>
         </div>
 
         <aside aria-labelledby="categories-label">
@@ -85,7 +85,7 @@
         <div class="p-4 space-y-4 bg-white rounded-lg shadow dark:bg-gray-800 xl:p-6 2xl:p-8 lg:space-y-6">
             <div class="flex items-center space-x-4">
                 <div class="flex-shrink-0">
-                    <img class="w-10 h-10 rounded-full" src="./asset/images/laureat<?php echo $laureat_signed['img']; ?>" alt="{{ .name }}">
+                    <img class="w-10 h-10 rounded-full" src="./asset/images/laureat/<?php echo $laureat_signed['img']; ?>" alt="{{ .name }}">
                 </div>
                 <div class="w-full">
                     <input data-modal-target="new post" data-modal-toggle="new post" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Créer un nouveau post" required />
@@ -237,7 +237,7 @@
                             <div class="col-span-2">
                                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Télécharger une image</label>
                                 <div class="flex items-center justify-center w-full">
-                                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <label for="post-img" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
@@ -245,7 +245,7 @@
                                             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                                             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                                         </div>
-                                        <input id="dropzone-file" name="post_img" type="file" class="hidden" />
+                                        <input id="post-img" name="post_img" type="file" class="hidden" />
                                     </label>
                                 </div>
                             </div>
@@ -300,7 +300,7 @@ ORDER BY
             <div class="p-4 space-y-4 bg-white rounded-lg shadow dark:bg-gray-800 xl:p-6 2xl:p-8 lg:space-y-6">
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                        <img class="w-10 h-10 rounded-full" src="./asset/images/laureat<?php echo $souvenir['img']; ?>" alt="<?php echo $souvenir['nom']; ?>">
+                        <img class="w-10 h-10 rounded-full" src="./asset/images/laureat/<?php echo $souvenir['img']; ?>" alt="<?php echo $souvenir['nom']; ?>">
                     </div>
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-semibold text-gray-900 truncate dark:text-white"><?php echo $souvenir['nom'] . ' ' . $souvenir['prenom']; ?><span class="text-gray-500 truncate font-normal dark:text-gray-400"> • <?php echo $souvenir['fonction']; ?></span></p>
@@ -326,6 +326,7 @@ ORDER BY
                         <?php if ($souvenir['id_laureat'] == $_SESSION['laureat_id']) { ?>
                             <div class="py-2">
                                 <a href="#" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white supprimer-post" data-id="<?php echo $souvenir['identifiant']; ?>">Supprimer</a>
+
                             </div>
                         <?php } ?>
                     </div>
@@ -374,7 +375,7 @@ ORDER BY
                                 <!-- Modal footer -->
                                 <div class="flex items-center p-4 space-x-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                                     <div class="flex-shrink-0">
-                                        <img class="w-10 h-10 rounded-full" src="./asset/images/laureat<?php echo $laureat_signed['img']; ?>" alt="<?php echo $laureat_signed['nom']; ?>">
+                                        <img class="w-10 h-10 rounded-full" src="./asset/images/laureat/<?php echo $laureat_signed['img']; ?>" alt="<?php echo $laureat_signed['nom']; ?>">
                                     </div>
                                     <form method="post" class="w-full flex flex-row" action="./php/posts/create-post-reply.php?souvenir_id=<?php echo $souvenir['identifiant']; ?>">
                                         <input name="post_reply" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tapez votre commentaire" required />
@@ -406,7 +407,7 @@ ORDER BY
 
 
     </div>
-    <div class="hidden w-full px-4 py-6 space-y-6 xl:flex xl:flex-col xl:sticky">
+    <div class=" hidden w-full px-4 py-6 space-y-6 xl:flex xl:flex-col xl:sticky">
 
         <div class="p-6 font-medium text-gray-500 bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
             <h4 class="mb-6 font-bold text-gray-900 uppercase dark:text-white">Autres lauréats</h4>
@@ -421,7 +422,9 @@ ORDER BY
 
                     <li class="flex justify-between items-start">
                         <div class="mr-3 shrink-0">
-                            <img class="mt-1 w-8 h-8 rounded-full" src="./asset/images/laureat<?php echo $laureat['img']; ?>" alt="">
+                            <a href="profil?id=<?php echo $laureat['Identifiant']; ?>">
+                                <img class="mt-1 w-8 h-8 rounded-full" src="./asset/images/laureat/<?php echo $laureat['img']; ?>" alt="">
+                            </a>
                         </div>
                         <div class="mr-auto">
                             <?php
@@ -434,11 +437,11 @@ ORDER BY
                             ?>
 
                             <span class="block font-medium text-gray-900 dark:text-white"><?php echo htmlspecialchars($truncatedName, ENT_QUOTES, 'UTF-8'); ?></span>
-                            <span class="text-sm">Web developer</span>
+                            <span class="text-sm"><?php echo $laureat['Fonction']; ?></span>
                         </div>
                         <div>
                             <buttoype="button" class="py-2 px-3 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                Profile
+                                <a href="profil?id=<?php echo $laureat['Identifiant']; ?>">Profile</a>
                                 </buttoype=>
                         </div>
                     </li>
@@ -465,7 +468,7 @@ ORDER BY
                 ?>
                     <div class="flex items-center py-4">
                         <a href="#" class="shrink-0">
-                            <img src="asset\images\articles\827db9598ded4d87c9381c5659b8e7ad.jpg" class="mr-4 w-12 max-w-full h-12 rounded-lg" alt="">
+                            <img src="./asset/images/articles/<?php echo $article['article_intro_img'] ?>" class="mr-4 w-12 max-w-full h-12 rounded-lg" alt="">
                         </a>
                         <a href="article?article_id=<?php echo $article['article_id']; ?>">
                             <h5 class="font-semibold leading-tight text-gray-900 dark:text-white hover:underline"><?php echo $article['article_titre']; ?></h5>
@@ -480,33 +483,28 @@ ORDER BY
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.supprimer-post').forEach(function(element) {
-            element.addEventListener('click', function(event) {
-                event.preventDefault();
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('.supprimer-post').forEach(button => {
+            button.addEventListener('click', function() {
+                const souvenirId = this.getAttribute('data-id');
 
-                const postId = this.getAttribute('data-id');
-                const postElement = this.closest('.p-4.space-y-4.bg-white.rounded-lg.shadow.dark\\:bg-gray-800.xl\\:p-6.2xl\\:p-8.lg\\:space-y-6');
-
-                if (confirm('Are you sure you want to delete this post?')) {
-                    fetch('./php/posts/delete-post.php', {
+                if (confirm('Are you sure you want to delete this souvenir?')) {
+                    fetch(`./php/posts/delete-post.php?souvenir_id=${souvenirId}`, {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'application/x-www-form-urlencoded',
                             },
-                            body: JSON.stringify({
-                                id: postId
-                            })
+                            body: `souvenir_id=${souvenirId}`
                         })
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                postElement.remove();
+                                // Remove the deleted souvenir from the DOM
+                                document.querySelector(`#post-menu-${souvenirId}`).closest('.p-4').remove();
                             } else {
-                                alert('Error deleting post.');
+                                alert('Failed to delete the souvenir. Please try again.');
                             }
-                        })
-                        .catch(error => console.error('Error:', error));
+                        });
                 }
             });
         });
