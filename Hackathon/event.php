@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['event_id'])) {
 } else {
     header("location: 404.php");
 }
+
 ?>
 
 
@@ -39,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['event_id'])) {
                     <p class="text-gray-500 dark:text-gray-400">
                         <a href="#" class="flex flex-row space-x-2 items-center font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="window.history.back(); return false;">
 
-                            <svg class="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10" transform="scale(-1, 1)">
+                            <svg class="text-white w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10" transform="scale(-1, 1)">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                             </svg>
 
@@ -139,11 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['event_id'])) {
             <aside class="hidden xl:block" aria-labelledby="sidebar-label">
                 <div class="xl:w-[336px] sticky top-6">
                     <h3 id="sidebar-label" class="sr-only">Sidebar</h3>
-                    <div class="mb-8">
-                        <button type="button" data-event-id="1" data-user-id="1" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 text-center w-full" id="attend-button">
-                            Attend l'événement
-                        </button>
-                    </div>
+
                     <div class="mb-12">
                         <h4 class="mb-4 text-sm font-bold text-gray-900 dark:text-white uppercase">Autres événements</h4>
                         <?php

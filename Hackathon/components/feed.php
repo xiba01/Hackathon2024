@@ -30,7 +30,36 @@
             <button type="button" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 w-full"><a href="profil?id=<?php echo $laureat_signed['Identifiant']; ?>">Mon Profile</a></button>
         </div>
 
-        <aside aria-labelledby="categories-label">
+        <aside class="hidden xl:block xl:w-80" aria-labelledby="sidebar-label">
+            <h3 id="sidebar-label" class="sr-only">Sidebar</h3>
+
+
+            <div class="p-5 mb-6 font-medium text-gray-500 bg-white-50 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:divide-gray-700">
+                <h4 class="mb-4 text-sm font-bold text-gray-900 uppercase dark:text-white">Evenements</h4>
+                <?php
+                $sql = "SELECT * 
+            FROM Events 
+            ORDER BY created_at DESC LIMIT 5";
+                $events = $db->prepare($sql);
+                $events->execute();
+
+                while ($event = $events->fetch(PDO::FETCH_ASSOC)) {
+                ?>
+                    <div class="flex items-center py-4">
+                        <a href="event?event_id=<?php echo $event['event_id']; ?>" class="shrink-0">
+                            <img src="./asset/images/events/<?php echo $event['event_img'] ?>" class="mr-4 w-12 max-w-full h-12 rounded-lg" alt="">
+                        </a>
+                        <a href="event?event_id=<?php echo $event['event_id']; ?>">
+                            <h5 class="font-semibold leading-tight text-gray-900 dark:text-white hover:underline"><?php echo $event['event_name']; ?></h5>
+                        </a>
+                    </div>
+                <?php } ?>
+            </div>
+
+
+        </aside>
+
+        <!-- <aside aria-labelledby="categories-label">
             <h3 id="categories-label" class="sr-only">Categories</h3>
             <nav class="p-6 mb-6 font-medium text-gray-500 bg-gray-50 rounded-lg border dark:bg-gray-800 border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 <ul class="mb-6 space-y-4">
@@ -76,7 +105,7 @@
                     </li>
                 </ul>
             </nav>
-        </aside>
+        </aside> -->
 
 
     </div>
@@ -406,6 +435,9 @@ ORDER BY
 
 
 
+
+
+
     </div>
     <div class=" hidden w-full px-4 py-6 space-y-6 xl:flex xl:flex-col xl:sticky">
 
@@ -471,7 +503,17 @@ ORDER BY
                             <img src="./asset/images/articles/<?php echo $article['article_intro_img'] ?>" class="mr-4 w-12 max-w-full h-12 rounded-lg" alt="">
                         </a>
                         <a href="article?article_id=<?php echo $article['article_id']; ?>">
-                            <h5 class="font-semibold leading-tight text-gray-900 dark:text-white hover:underline"><?php echo $article['article_titre']; ?></h5>
+                            <h5 class="font-semibold leading-tight text-gray-900 dark:text-white hover:underline">
+                                <?php
+                                $title = $article['article_titre'];
+                                if (strlen($title) > 40) {
+                                    echo substr($title, 0, 43) . '...';
+                                } else {
+                                    echo $title;
+                                }
+                                ?>
+                            </h5>
+
                         </a>
                     </div>
                 <?php } ?>

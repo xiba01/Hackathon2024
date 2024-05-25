@@ -1385,10 +1385,6 @@ input:checked + .toggle-bg {
   margin-inline-start: -0.25rem;
 }
 
-.-mt-5 {
-  margin-top: -1.25rem;
-}
-
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -1399,10 +1395,6 @@ input:checked + .toggle-bg {
 
 .mb-1 {
   margin-bottom: 0.25rem;
-}
-
-.mb-1\.5 {
-  margin-bottom: 0.375rem;
 }
 
 .mb-10 {
@@ -1483,10 +1475,6 @@ input:checked + .toggle-bg {
 
 .ml-5 {
   margin-left: 1.25rem;
-}
-
-.ml-6 {
-  margin-left: 1.5rem;
 }
 
 .mr-1 {
@@ -1744,6 +1732,10 @@ input:checked + .toggle-bg {
   height: 16rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
 .h-8 {
   height: 2rem;
 }
@@ -1809,8 +1801,16 @@ input:checked + .toggle-bg {
   height: 100vh;
 }
 
-.h-7 {
-  height: 1.75rem;
+.h-\[px\] {
+  height: px;
+}
+
+.h-\[350px\] {
+  height: 350px;
+}
+
+.h-\[400px\] {
+  height: 400px;
 }
 
 .max-h-full {
@@ -1909,6 +1909,10 @@ input:checked + .toggle-bg {
   width: 16rem;
 }
 
+.w-7 {
+  width: 1.75rem;
+}
+
 .w-8 {
   width: 2rem;
 }
@@ -1947,10 +1951,6 @@ input:checked + .toggle-bg {
 
 .w-full {
   width: 100%;
-}
-
-.w-7 {
-  width: 1.75rem;
 }
 
 .min-w-0 {
@@ -3454,11 +3454,6 @@ input:checked + .toggle-bg {
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 
-.bg-purple-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(144 97 249 / var(--tw-bg-opacity));
-}
-
 .bg-red-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(253 232 232 / var(--tw-bg-opacity));
@@ -3467,11 +3462,6 @@ input:checked + .toggle-bg {
 .bg-red-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(253 242 242 / var(--tw-bg-opacity));
-}
-
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(224 36 36 / var(--tw-bg-opacity));
 }
 
 .bg-red-700 {
@@ -4990,6 +4980,11 @@ input:checked + .toggle-bg {
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
+.hover\:text-gray-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
@@ -5005,19 +5000,14 @@ input:checked + .toggle-bg {
   color: rgb(29 78 216 / var(--tw-text-opacity));
 }
 
-.hover\:text-white:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.hover\:text-gray-700:hover {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
 .hover\:text-primary-800:hover {
   --tw-text-opacity: 1;
   color: rgb(30 64 175 / var(--tw-text-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
@@ -5388,11 +5378,6 @@ input:checked + .toggle-bg {
   color: rgb(49 196 141 / var(--tw-text-opacity));
 }
 
-.dark\:text-primary-400:is(.dark *) {
-  --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity));
-}
-
 .dark\:text-primary-500:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
@@ -5497,6 +5482,11 @@ input:checked + .toggle-bg {
   color: rgb(63 131 248 / var(--tw-text-opacity));
 }
 
+.dark\:hover\:text-gray-200:hover:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
 .dark\:hover\:text-gray-300:hover:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
@@ -5515,11 +5505,6 @@ input:checked + .toggle-bg {
 .dark\:hover\:text-white:hover:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.dark\:hover\:text-gray-200:hover:is(.dark *) {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
 .dark\:hover\:underline:hover:is(.dark *) {
@@ -6158,6 +6143,11 @@ input:checked + .toggle-bg {
     padding-bottom: 6rem;
   }
 
+  .lg\:py-10 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
   .lg\:pb-24 {
     padding-bottom: 6rem;
   }
@@ -6172,6 +6162,11 @@ input:checked + .toggle-bg {
 
   .lg\:pt-6 {
     padding-top: 1.5rem;
+  }
+
+  .lg\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .lg\:text-3xl {
@@ -6192,11 +6187,6 @@ input:checked + .toggle-bg {
   .lg\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  .lg\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
 
   .lg\:text-blue-500 {
