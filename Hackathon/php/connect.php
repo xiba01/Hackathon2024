@@ -1,10 +1,10 @@
 <?php
 try {
-    $host = "hackathon-oussamamazali-f77b.h.aivencloud.com";
-    $dbname = "copains";
-    $port = "27532";
-    $password = "AVNS_nK0feKxCkBnYiCH7oVV";
-    $user = "avnadmin";
+    $host = "#";
+    $dbname = "#";
+    $port = "#";
+    $password = "#";
+    $user = "#";
     $option = array(
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
         PDO::MYSQL_ATTR_SSL_CA => 'ca.pem',
